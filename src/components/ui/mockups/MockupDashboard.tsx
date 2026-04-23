@@ -50,7 +50,7 @@ export function MockupDashboard() {
             letterSpacing: "0.02em",
           }}
         >
-          app.creatorlyff.in/dashboard
+          creatoelyff.app/dashboard
         </div>
       </div>
 
