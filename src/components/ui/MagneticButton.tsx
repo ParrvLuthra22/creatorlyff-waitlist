@@ -3,20 +3,13 @@
 import { useRef, forwardRef, ReactNode, MouseEvent, CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
-interface MagneticButtonProps {
+interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  className?: string;
-  onClick?: () => void;
-  style?: CSSProperties;
-  id?: string;
-  type?: "button" | "submit" | "reset";
-  disabled?: boolean;
-  "aria-label"?: string;
 }
 
 export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>(
   function MagneticButton(
-    { children, className, onClick, style, id, type = "button", disabled, "aria-label": ariaLabel },
+    { children, className, onMouseMove: userOnMouseMove, onMouseLeave: userOnMouseLeave, type = "button", ...props },
     forwardedRef
   ) {
     const localRef = useRef<HTMLButtonElement>(null);
@@ -32,8 +25,9 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     const RADIUS = 80;
 
     async function onMouseMove(e: MouseEvent<HTMLButtonElement>) {
+      userOnMouseMove?.(e);
       const el = localRef.current;
-      if (!el || disabled) return;
+      if (!el || props.disabled) return;
       const { gsap } = await import("gsap");
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
@@ -47,8 +41,9 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
       }
     }
 
-    async function onMouseLeave() {
-      if (disabled) return;
+    async function onMouseLeave(e: MouseEvent<HTMLButtonElement>) {
+      userOnMouseLeave?.(e);
+      if (props.disabled) return;
       const { gsap } = await import("gsap");
       gsap.to(localRef.current, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1,0.3)" });
     }
@@ -56,16 +51,12 @@ export const MagneticButton = forwardRef<HTMLButtonElement, MagneticButtonProps>
     return (
       <button
         ref={setRef}
-        id={id}
         type={type}
-        disabled={disabled}
-        aria-label={ariaLabel}
         data-magnetic="true"
         className={cn("relative", className)}
-        style={style}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
-        onClick={onClick}
+        {...props}
       >
         {children}
       </button>

@@ -11,8 +11,8 @@ export function CustomCursor() {
     // Hide on touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    const blob = blobRef.current;
-    const dot  = dotRef.current;
+    const blob = blobRef.current as HTMLDivElement;
+    const dot  = dotRef.current as HTMLDivElement;
     if (!blob || !dot) return;
 
     let blobX: (v: number) => void;
