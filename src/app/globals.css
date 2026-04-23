@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Colours ─────────────────────────────────────────────────────── */
+  --color-background:       #000000;
+  --color-surface-1:        #0A0A0F;
+  --color-surface-2:        #14141C;
+  --color-border-subtle:    rgba(255, 255, 255, 0.08);
+  --color-border-glow:      rgba(74, 158, 255, 0.4);
+  --color-primary-glow:     #4A9EFF;
+  --color-secondary-glow:   #B57AFF;
+  --color-tertiary-accent:  #5EEAD4;
+  --color-text-primary:     #FFFFFF;
+  --color-text-secondary:   #A0A0B0;
+  --color-text-muted:       #6A6A78;
+
+  /* ── Fonts ───────────────────────────────────────────────────────── */
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
+
+  /* ── Border radii ────────────────────────────────────────────────── */
+  --radius-card:  24px;
+  --radius-modal: 28px;
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  cursor: none !important;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis owns this */
+  overflow: hidden;      /* Lenis owns scroll */
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(74, 158, 255, 0.3);
+  color: #ffffff;
+}
+
+/* ── Scrollbar hidden (Lenis handles it) ─────────────────────────────── */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* ── Lenis body unlock ───────────────────────────────────────────────── */
+html.lenis, html.lenis body {
+  height: auto;
+  overflow: auto;
+}
+
+/* ── Typography scale ────────────────────────────────────────────────── */
+.display {
+  font-size: clamp(48px, 6.5vw, 96px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.heading-lg {
+  font-size: clamp(32px, 4vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.heading-md {
+  font-size: clamp(22px, 2.5vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.body-lg  { font-size: 1.125rem; font-weight: 300; line-height: 1.7; }
+.body-md  { font-size: 1rem;     font-weight: 300; line-height: 1.7; }
+.body-sm  { font-size: 0.875rem; font-weight: 300; line-height: 1.6; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+/* ── Glow utilities ──────────────────────────────────────────────────── */
+.glow-border {
+  border: 1px solid rgba(74, 158, 255, 0.4);
+  box-shadow: 0 0 40px rgba(74, 158, 255, 0.15);
+}
+
+.glow-border-violet {
+  border: 1px solid rgba(181, 122, 255, 0.4);
+  box-shadow: 0 0 40px rgba(181, 122, 255, 0.15);
+}
+
+.subtle-border {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Glass card ──────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Hero headline — needle gradient ──────────────────────────────────── */
+.needle-gradient {
+  background: linear-gradient(90deg, #4A9EFF 0%, #B57AFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ── Eyebrow pulse dot ───────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Word reveal wrapper — clip the char from sliding ────────────────── */
+.word-clip {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: inherit;
+}
+
+/* ── Phone Input Overrides ────────────────────────────────────────────── */
+.PhoneInput {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.PhoneInputCountry {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.PhoneInputCountrySelect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.PhoneInputCountryIcon {
+  width: 24px;
+  height: 16px;
+}
+.PhoneInputCountryIconImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.PhoneInputInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: #ffffff;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.PhoneInputInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.PhoneInputInput:focus {
+  border-color: rgba(74, 158, 255, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+}
+.PhoneInputCountrySelectArrow {
+  display: block;
+  width: 0.3em;
+  height: 0.3em;
+  margin-left: 6px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.5);
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  border-left-width: 0;
+  border-right-width: 1px;
+  transform: rotate(45deg);
+  opacity: 0.5;
+}
+.word-inner {
+  display: inline-block;
+}
+
