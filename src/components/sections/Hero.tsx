@@ -176,7 +176,7 @@ export function Hero() {
               fontWeight: 400,
             }}
           >
-            LAUNCHING Q2 2026
+            LAUNCHING SOON
           </span>
         </div>
 

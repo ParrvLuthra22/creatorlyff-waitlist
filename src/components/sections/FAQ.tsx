@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const FAQ_ITEMS = [
   {
     question: "When does Creatorlyff launch?",
-    answer: "Q2 2026 for early access. Waitlist members get priority onboarding and three months of Pro for free."
+    answer: "Soon in 2026 for early access. Waitlist members get priority onboarding."
   },
   {
     question: "Is there a free plan?",
