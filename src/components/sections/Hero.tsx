@@ -234,7 +234,7 @@ export function Hero() {
           </MagneticButton>
 
           {/* Secondary CTA */}
-          <button
+          {/* <button
             className="w-full sm:w-auto flex items-center justify-center"
             style={{
               borderRadius: 9999,
@@ -257,7 +257,7 @@ export function Hero() {
             }}
           >
             Watch demo
-          </button>
+          </button> */}
         </div>
 
         {/* ── Trust row ────────────────────────────────────────────── */}
