@@ -274,7 +274,7 @@ export function Hero() {
             textAlign: "center",
           }}
         >
-          Trusted by 500+ creators and brands on the waitlist
+          Trusted by 50+ creators and brands on the waitlist
         </div>
 
         {/* ── Mockup group ─────────────────────────────────────────── */}
